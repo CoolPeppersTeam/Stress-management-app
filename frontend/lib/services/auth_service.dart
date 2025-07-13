@@ -2,15 +2,21 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 
 class AuthService {
-  static const String _baseUrl = 'http://localhost:8080'; // localhost из-под эмулятора Android
+  static String get baseUrl {
+    if (kIsWeb) {
+      return 'http://localhost:8080';
+    } else {
+      return 'http://10.0.2.2:8080';
+    }
+  }
+
   final _storage = const FlutterSecureStorage();
-
-
   Future<String> login(String email, String password) async {
     final resp = await http.post(
-      Uri.parse('$_baseUrl/login'),
+      Uri.parse('${baseUrl}/login'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'email': email, 'password': password}),
     );
@@ -26,7 +32,7 @@ class AuthService {
 
   Future<void> register(String email, String password, String nickname) async {
     final response = await http.post(
-      Uri.parse('$_baseUrl/register'),
+      Uri.parse('$baseUrl/register'),
       body: json.encode({
         'email': email,
         'password': password,

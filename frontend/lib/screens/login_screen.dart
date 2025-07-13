@@ -93,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       // Username
                       TextFormField(
                         controller: _username,
-                        decoration: _inputDecoration(context, 'Username'),
+                        decoration: _inputDecoration(context, 'Email'),
                         validator: (value) =>
                         value == null || value.trim().isEmpty
                             ? 'Username cannot be empty'
