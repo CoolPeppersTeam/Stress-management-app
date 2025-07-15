@@ -83,7 +83,7 @@ class AuthService {
       return token;
     }
 
-    throw Exception('Ошибка входа (${resp.statusCode}): ${resp.body}');
+    throw Exception('Login error (${resp.statusCode}): ${resp.body}');
   }
 
   Future<void> register(String email, String password, String nickname) async {
@@ -100,7 +100,7 @@ class AuthService {
     if (response.statusCode == 201) {
       await _saveUserInfo(email: email, nickname: nickname); // сохраняем nickname и email
     } else {
-      throw Exception('Ошибка регистрации');
+      throw Exception('Registration error');
     }
   }
 
@@ -111,7 +111,7 @@ class AuthService {
   /// Добавление новой стресс-сессии
   Future<void> addSession(String description, int level, DateTime date) async {
     final token = await savedToken;
-    if (token == null) throw Exception('Токен не найден');
+    if (token == null) throw Exception('Token was not found');
 
     final payload = {
       'description': description,
@@ -132,7 +132,7 @@ class AuthService {
 
     if (response.statusCode < 200 || response.statusCode >= 300) {
       throw Exception(
-        'Ошибка создания сессии (${response.statusCode}): ${response.body}'
+        'Error with session creation (${response.statusCode}): ${response.body}'
       );
     }
   }
