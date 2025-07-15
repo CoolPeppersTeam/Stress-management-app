@@ -17,15 +17,14 @@ class Session {
   });
 
   factory Session.fromJson(Map<String, dynamic> json) => Session(
-        id: json['id'] ?? json['ID'] as int,
-        description: json['description'] as String? ?? '',
-        stressLevel: json['stress_level'] as int? ?? 0,
-        date: DateTime.parse(json['date'] as String? ?? ''),
-      );
+    id: json['id'] ?? json['ID'] as int,
+    description: json['description'] as String? ?? '',
+    stressLevel: json['stress_level'] as int? ?? 0,
+    date: DateTime.parse(json['date'] as String? ?? ''),
+  );
 }
 
 class SessionsService {
-  
   static Future<List<Session>> fetchSessions() async {
     final token = await AuthService().savedToken;
     if (token == null) throw Exception('The token was not found');
@@ -43,8 +42,6 @@ class SessionsService {
   }
 }
 
-// UI LAYER
-
 class SessionsListScreen extends StatefulWidget {
   const SessionsListScreen({super.key});
 
@@ -52,7 +49,10 @@ class SessionsListScreen extends StatefulWidget {
   State<SessionsListScreen> createState() => _SessionsListScreenState();
 }
 
-class _SessionsListScreenState extends State<SessionsListScreen> {
+class _SessionsListScreenState extends State<SessionsListScreen> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   late Future<List<Session>> _sessionsFut;
 
   @override
@@ -63,23 +63,21 @@ class _SessionsListScreenState extends State<SessionsListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context); // Необходимо для AutomaticKeepAliveClientMixin
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Stack(
         children: [
-          // листва сверху‑справа
           Positioned(
             top: -30,
             right: -10,
             child: Image.asset('assets/images/leaf_top.png', width: 180),
           ),
-          // листва снизу‑слева
           Positioned(
             bottom: -20,
             left: -20,
             child: Image.asset('assets/images/leaf_bottom.png', width: 200),
           ),
-          // контент
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -153,7 +151,6 @@ class _SessionCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // уровень стресса как бейдж
           Container(
             width: 36,
             height: 36,
@@ -171,7 +168,6 @@ class _SessionCard extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 16),
-          // описание + дата
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -40,20 +40,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Регистрация успешна'),
+            content: Text('Successful registration'),
             behavior: SnackBarBehavior.floating,
           ),
         );
 
-        // Переход на HomeScreen
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
-        );
+        Navigator.pushReplacementNamed(context, '/home');
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Ошибка: ${e.toString()}'),
+            content: Text('Error: ${e.toString()}'),
             behavior: SnackBarBehavior.floating,
           ),
         );
@@ -61,7 +57,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Проверьте поля формы'),
+          content: Text('Check the data from forms for correctness, please'),
           behavior: SnackBarBehavior.floating,
         ),
       );

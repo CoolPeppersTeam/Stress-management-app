@@ -9,7 +9,7 @@ class Recommendation {
 
   factory Recommendation.fromJson(Map<String, dynamic> json) {
     final id = json['id'] ?? json['ID'];
-    if (id == null) throw Exception('Некорректные данные: id == null');
+    if (id == null) throw Exception('Incorrect data: id == null');
     return Recommendation(
       id: id as int,
       title: json['title'] as String? ?? '',

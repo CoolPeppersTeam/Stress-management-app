@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../services/auth_service.dart'; // проверь, что здесь есть метод addSession
-import 'home_screen.dart';
+import '../services/auth_service.dart';
+import 'main_wrapper_screen.dart'; // Импортируем MainWrapperScreen
 
 class AddSessionScreen extends StatefulWidget {
   const AddSessionScreen({super.key});
@@ -10,25 +10,26 @@ class AddSessionScreen extends StatefulWidget {
   State<AddSessionScreen> createState() => _AddSessionScreenState();
 }
 
-class _AddSessionScreenState extends State<AddSessionScreen> {
+class _AddSessionScreenState extends State<AddSessionScreen> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => false; // Не сохраняем состояние для этого экрана
+
   final _descriptionController = TextEditingController();
   double _stressLevel = 5;
   DateTime _selectedDate = DateTime.now();
 
   Future<void> _submit() async {
-    // 1) Проверяем, что описание не пустое
     final desc = _descriptionController.text.trim();
     if (desc.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Пожалуйста, введите описание'),
+          content: const Text('Please, enter the description'),
           backgroundColor: Theme.of(context).colorScheme.error,
         ),
       );
       return;
     }
 
-    // 2) Отправляем на сервер
     try {
       await AuthService().addSession(
         desc,
@@ -36,14 +37,18 @@ class _AddSessionScreenState extends State<AddSessionScreen> {
         _selectedDate,
       );
       if (!mounted) return;
-      Navigator.pushReplacement(
+
+      // Изменено: возвращаемся на MainWrapperScreen
+      Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
+        MaterialPageRoute(builder: (_) => const MainWrapperScreen()),
+            (route) => false,
       );
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Ошибка при сохранении сессии: $e'),
+          content: Text('Error with session saving: $e'),
           backgroundColor: Theme.of(context).colorScheme.error,
         ),
       );
@@ -57,17 +62,30 @@ class _AddSessionScreenState extends State<AddSessionScreen> {
       firstDate: DateTime(2000),
       lastDate: DateTime.now(),
     );
-    if (picked != null) {
-      setState(() {
-        _selectedDate = picked;
-      });
+    if (picked != null && mounted) {
+      setState(() => _selectedDate = picked);
     }
   }
 
   @override
+  void dispose() {
+    _descriptionController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context); // Необходимо для AutomaticKeepAliveClientMixin
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Добавить сессию')),
+      // AppBar оставляем, так как это отдельный экран
+      appBar: AppBar(
+        title: const Text('Add session'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -75,7 +93,7 @@ class _AddSessionScreenState extends State<AddSessionScreen> {
             TextField(
               controller: _descriptionController,
               decoration: InputDecoration(
-                labelText: 'Описание',
+                labelText: 'Description',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -86,7 +104,7 @@ class _AddSessionScreenState extends State<AddSessionScreen> {
             const SizedBox(height: 16),
             Row(
               children: [
-                const Text('Уровень стресса:'),
+                const Text('Stress level:'),
                 Expanded(
                   child: Slider(
                     value: _stressLevel,
@@ -94,11 +112,7 @@ class _AddSessionScreenState extends State<AddSessionScreen> {
                     max: 10,
                     divisions: 9,
                     label: _stressLevel.round().toString(),
-                    onChanged: (value) {
-                      setState(() {
-                        _stressLevel = value;
-                      });
-                    },
+                    onChanged: (value) => setState(() => _stressLevel = value),
                   ),
                 ),
               ],
@@ -106,13 +120,15 @@ class _AddSessionScreenState extends State<AddSessionScreen> {
             const SizedBox(height: 16),
             Row(
               children: [
-                Text('Дата: ${DateFormat.yMMMd().format(_selectedDate)}'),
+                Text('Date: ${DateFormat.yMMMd().format(_selectedDate)}'),
                 const Spacer(),
                 TextButton(
                   onPressed: _pickDate,
                   child: Text(
-                    'Изменить дату',
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    'Change the Date',
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
               ],
@@ -128,10 +144,7 @@ class _AddSessionScreenState extends State<AddSessionScreen> {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: Text(
-                'Сохранить',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
+              child: const Text('Save'),
             ),
           ],
         ),

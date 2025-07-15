@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../screens/add_session_screen.dart';
 import '../services/auth_service.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -15,7 +14,10 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   final Color mintColor = const Color(0xFF7FC6A6);
   final Color lightMint = const Color(0xFFA3D9C9);
 
@@ -44,23 +46,15 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _connectWebSocket() {
-    final url = 'ws://localhost:8080/ws'; // Заменить на свой адрес
+    final url = 'ws://localhost:8080/ws';
     _channel = WebSocketChannel.connect(Uri.parse(url));
     _wsSubscription = _channel!.stream.listen((event) {
-      setState(() {
-        isWsConnected = true;
-      });
-      // Можно обработать события new_session и обновлять список
+      setState(() => isWsConnected = true);
     }, onDone: () {
-      setState(() {
-        isWsConnected = false;
-      });
-      // Попробовать переподключиться через 5 секунд
+      setState(() => isWsConnected = false);
       Future.delayed(const Duration(seconds: 5), _connectWebSocket);
     }, onError: (e) {
-      setState(() {
-        isWsConnected = false;
-      });
+      setState(() => isWsConnected = false);
       Future.delayed(const Duration(seconds: 5), _connectWebSocket);
     });
   }
@@ -72,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final name = await auth.fetchNicknameFromBackend();
       final token = await auth.savedToken;
       if (token == null) throw Exception('Not authorized');
+
       final resp = await http.get(
         Uri.parse('${AuthService.baseUrl}/stats'),
         headers: {'Authorization': 'Bearer $token'},
@@ -80,6 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Uri.parse('${AuthService.baseUrl}/sessions'),
         headers: {'Authorization': 'Bearer $token'},
       );
+
       if (resp.statusCode == 200 && sessionsResp.statusCode == 200) {
         final data = json.decode(resp.body);
         final sessionsData = json.decode(sessionsResp.body) as List;
@@ -90,12 +86,10 @@ class _HomeScreenState extends State<HomeScreen> {
           recentSessions = sessionsData.take(4).toList();
           loading = false;
         });
-      } else if (resp.statusCode == 401 || resp.statusCode == 403 || sessionsResp.statusCode == 401 || sessionsResp.statusCode == 403) {
-        if (mounted) {
-          Navigator.of(context).pushReplacementNamed('/login');
-        }
+      } else if (resp.statusCode == 401 || sessionsResp.statusCode == 401) {
+        if (mounted) Navigator.of(context).pushReplacementNamed('/login');
       } else {
-        setState(() { error = 'Ошибка загрузки статистики или сессий'; loading = false; });
+        setState(() { error = 'Error with data loading'; loading = false; });
       }
     } catch (e) {
       if (e.toString().contains('Not authorized') && mounted) {
@@ -107,87 +101,45 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   String _formatDate(DateTime date) {
-    final months = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
-    ];
-    final weekdays = [
-      'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
-    ];
-    final dayName   = weekdays[date.weekday - 1];
-    final monthName = months[date.month   - 1];
-    return '$dayName, $monthName ${date.day}';
+    final months = ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'];
+    final weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return '${weekdays[date.weekday - 1]}, ${months[date.month - 1]} ${date.day}';
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context); // Необходимо для AutomaticKeepAliveClientMixin
     final themeProvider = Provider.of<ThemeProvider>(context);
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    final Color darkButtonColor = Color(0xFF23272F); // Цвет для кнопок в тёмной теме
-    final Color mintColor = Color(0xFF7AC7A6); // Цвет текста на кнопке
+    final Color darkButtonColor = Color(0xFF23272F);
     final Color unfilledTrackColor = isDark ? Color(0xFF23272F) : Colors.grey[300]!;
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(
-        title: Text('Главная', style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.onBackground)),
-        actions: [
-          Row(
-            children: [
-              Icon(
-                Icons.wifi,
-                color: isWsConnected ? Colors.green : Colors.grey,
-                size: 22,
-              ),
-              const SizedBox(width: 8),
-            ],
-          ),
-          Switch(
-            value: themeProvider.themeMode == ThemeMode.dark,
-            onChanged: (value) {
-              themeProvider.toggleTheme(value);
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.settings, color: Colors.white, size: 22),
-            onPressed: () {
-              Navigator.pushNamed(context, '/settings');
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.logout, color: Colors.white, size: 22),
-            tooltip: 'Logout',
-            onPressed: () async {
-              await AuthService().logout();
-              if (mounted) {
-                Navigator.of(context).pushReplacementNamed('/login');
-              }
-            },
-          ),
-        ],
-      ),
       body: loading
           ? const Center(child: CircularProgressIndicator())
           : error != null
-              ? Center(child: Text(error!, style: const TextStyle(color: Colors.red)))
-              : SafeArea(
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildHeader(),
-                          const SizedBox(height: 28),
-                          _buildStressIndicator(),
-                          const SizedBox(height: 28),
-                          _buildNewButtonsSection(context),
-                          const SizedBox(height: 24),
-                          _buildHistorySection(context),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+          ? Center(child: Text(error!, style: const TextStyle(color: Colors.red)))
+          : SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildHeader(),
+                const SizedBox(height: 28),
+                _buildStressIndicator(),
+                const SizedBox(height: 28),
+                _buildNewButtonsSection(context),
+                const SizedBox(height: 24),
+                _buildHistorySection(context),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 
