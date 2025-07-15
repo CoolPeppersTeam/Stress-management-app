@@ -31,9 +31,9 @@ class _RecommendationsScreenState extends State<RecommendationsScreen> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Ошибка: \\${snapshot.error}'));
+            return Center(child: Text('Error: \\${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('Нет рекомендаций'));
+            return const Center(child: Text('No recomendations'));
           }
           final recommendations = snapshot.data!;
           return ListView.separated(
