@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Успешный вход!'),
+          content: Text('Successful entry!'),
           behavior: SnackBarBehavior.floating,
         ),
       );
