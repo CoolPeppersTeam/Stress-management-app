@@ -20,7 +20,7 @@ class RecommendationService {
   Future<List<Recommendation>> fetchRecommendations() async {
     final token = await _getToken();
     if (token == null) {
-      throw Exception('Не авторизован');
+      throw Exception('Not authorized');
     }
     final response = await http.get(
       Uri.parse('$_baseUrl/recommendations'),
@@ -30,7 +30,7 @@ class RecommendationService {
       final List<dynamic> data = json.decode(response.body);
       return data.map((json) => Recommendation.fromJson(json)).toList();
     } else {
-      throw Exception('Ошибка загрузки рекомендаций');
+      throw Exception('Error with recomendations loading');
     }
   }
 }
