@@ -105,6 +105,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "ok": MessageLookupByLibrary.simpleMessage("ОК"),
     "passwordLabel": MessageLookupByLibrary.simpleMessage("Пароль"),
+    "pleaseWait": MessageLookupByLibrary.simpleMessage(
+      "Пожалуйста, подождите...",
+    ),
     "recentHistory": MessageLookupByLibrary.simpleMessage("Последние записи"),
     "recommendationsForRelax": MessageLookupByLibrary.simpleMessage(
       "Рекомендации для расслабления",

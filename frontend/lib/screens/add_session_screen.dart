@@ -119,7 +119,7 @@ class _AddSessionScreenState extends State<AddSessionScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Пожалуйста, подождите...',
+                  S.of(context).pleaseWait,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         color: Theme.of(context).colorScheme.primary,
                         fontWeight: FontWeight.bold,
