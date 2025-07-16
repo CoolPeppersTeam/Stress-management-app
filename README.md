@@ -118,6 +118,19 @@ These may be displayed as a feed on the main screen.
 
 - [X] RU/ENG localization
 
+![localization](https://github.com/user-attachments/assets/3be467b9-46ec-4f74-a09d-96aa10cc4be5)
+
+- [X] Dynamic statistics
+- When you have low stress level
+![low_level](https://github.com/user-attachments/assets/d9c13d11-710d-435e-a517-354c24612389)
+
+- When you have medium stress level
+![moderate_level](https://github.com/user-attachments/assets/86f40eb1-9e34-43b6-9c21-0315e64158da)
+
+- When you have high stress level
+---
+![high_level](https://github.com/user-attachments/assets/a793df70-14e8-4492-a589-069e817d0fc4)
+
 ## Technical stack
 ### Backend:
 
@@ -148,14 +161,15 @@ Follow these steps to set up the project locally for development and testing.
 
 Before you begin, make sure you have the following installed:
 
-- **Go** (>=1.20)  
+- **Go** 
   [Download Go](https://golang.org/dl/)
 
-- **Flutter** (>=3.0)  
+- **Flutter**  
   [Get Started with Flutter](https://flutter.dev/docs/get-started/install)
 
 - **PostgreSQL** 
 
+- **Docker**
 ---
 
 ### Clone the Repository
@@ -174,17 +188,21 @@ cd Stress-management-app
 cd backend
 go mod tidy
 ```
-```bash
-docker compose up --build
-```
 
 ### Frontend setup
 ```bash
 cd frontend
 flutter pub get
-flutter run
+```
+### Run docker compose 
+```bash
+docker compose up --build
 ```
 
+### Find website here
+```
+http://localhost:8081
+```
 
 ## Architecture Overview
 
