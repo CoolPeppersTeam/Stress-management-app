@@ -1,23 +1,23 @@
-# 👥 Project Roles and Contributions
+# Project Roles and Contributions
 
 This document summarizes the main areas of responsibility for each team member.
 
 ---
-## 📝 [Irina](https://github.com/slickip) - i.poltorakova@innopolis.university
+## [Irina](https://github.com/slickip) - i.poltorakova@innopolis.university
 
-**Project Management & Support**
+**Project Management & DevOps**
 - Defined project scope, plans, and deadlines
+- Prepared and worked with the repository
 - Managed configuration files and environment setup
 - Set up docker compose
 - Seeded test data and configured CORS
 - Created architecture diagrams and documentation
-- Prepared the presentation for project defense
 - Make CI/CD
 - Configure GitHub pages
 
 ---
 
-## 🧩 [Arthur](https://github.com/ArthurAipov) - a.aipov@innopolis.university
+## [Arthur](https://github.com/ArthurAipov) - a.aipov@innopolis.university
 
 **Backend Development**
 - Designed and implemented the REST API in Go
@@ -29,7 +29,7 @@ This document summarizes the main areas of responsibility for each team member.
 
 ---
 
-## 🎨 [Ekaterina](https://github.com/katotik) - e.evdokimova@innopolis.university
+## [Ekaterina](https://github.com/katotik) - e.evdokimova@innopolis.university
 
 **Frontend Development**
 - Implemented user registration screens with validation
@@ -38,29 +38,28 @@ This document summarizes the main areas of responsibility for each team member.
 - Integrated API calls into the app
 - Added loading indicators, notifications, and styling improvements
 - Tested functionality on Android
+- Integrated the WebSocket client for live updates
 
 ---
 
-## 💻 [Ksenia](https://github.com/kssloveyou) - k.babanina@innopolis.university
+## [Ksenia](https://github.com/kssloveyou) - k.babanina@innopolis.university
 
 **Frontend Development**
 - Developed login and session history screens
 - Integrated authentication and session APIs
 - Created the statistics screen with dynamic messages
 - Added deletion confirmation dialogs
-- Conducted cross-platform testing (iOS and web)
+- Integrated the WebSocket client for live updates
+- Prepared the presentation for project defense
 
 ---
 
-## 📱 [Katarina](https://github.com/katharina-gross) - k.gross@innopolis.university
+## [Katarina](https://github.com/katharina-gross) - k.gross@innopolis.university
 
 **Frontend Development**
-- Built the home screen and navigation flow
+- Built the home screen
 - Created the SplashScreen for token validation
-- Integrated the WebSocket client for live updates
-- Implemented offline caching
 - Enhanced the statistics screen with a stress level graph
-- Conducted additional testing and UI polishing
 
 ---
 
