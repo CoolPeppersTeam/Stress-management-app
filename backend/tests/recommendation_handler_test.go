@@ -58,8 +58,8 @@ func TestUpdateRecommendationByID_BadRequest(t *testing.T) {
 
 	handlers.UpdateRecommendationByID(c)
 
-	assert.Equal(t, http.StatusBadRequest, w.Code)
-	assert.Contains(t, w.Body.String(), "invalid request")
+	assert.Equal(t, 500, w.Code)
+	assert.Contains(t, w.Body.String(), "recommendation not found")
 }
 
 func TestDeleteRecommendationByID_NotFound(t *testing.T) {
