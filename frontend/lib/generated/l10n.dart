@@ -89,6 +89,16 @@ class S {
     return Intl.message('Loading…', name: 'splashLoading', desc: '', args: []);
   }
 
+  /// `Please wait...`
+  String get pleaseWait {
+    return Intl.message(
+      'Please wait...',
+      name: 'pleaseWait',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Welcome back!`
   String get loginTitle {
     return Intl.message(
