@@ -24,7 +24,7 @@ Read about contributors [here](https://github.com/slickip/Stress-management-app/
 - [X] Responsive UI design with custom widgets (1 point)
 - [X] State management implementation (1 point)
 - [X] Offline data persistence (1 point)
-- [X] Unit and widget tests (1 point)
+- [ ] Unit and widget tests (1 point)
 - [X] Support light and dark mode (1 point)
 
 #### DevOps & deployment (4 points)
@@ -35,7 +35,7 @@ Read about contributors [here](https://github.com/slickip/Stress-management-app/
 
 ### Non-Technical Requirements (10 points)
 #### Project management (4 points)
-- [ ] GitHub organization with well-maintained repository (1 point)
+- [X] GitHub organization with well-maintained repository (1 point)
 - [X] Regular commits and meaningful pull requests from all team members (1 point)
 - [X] Project board (GitHub Projects) with task tracking (1 point)
 - [X] Team member roles and responsibilities documentation (1 point)
@@ -61,9 +61,7 @@ Comprehensive README with:
 - Animated loading
 - [ ] Widget implementation for native mobile elements (up to 2 points)
       
-Total points implemented: 28/30 (excluding bonus points)
-
-Note: For each implemented feature, provide a brief description or link to the relevant implementation below the checklist.
+Total points implemented: 29/30 (excluding bonus points)
 
 ## GitHub Pages Deployment
 
@@ -94,7 +92,7 @@ flutter build web --release --base-href /Stress-management-app/
 - [X] Creation and Viewing of Stress Sessions
 - Users can create entries documenting stressful experiences, including description, stress level, and date.
 
-![save_load_session](https://github.com/user-attachments/assets/f5940701-6b0f-4194-a1d3-5dc5db8e40a2)
+![save_session](https://github.com/user-attachments/assets/f5f78fb0-4745-49e0-af33-dda477fa62bb)
 
 - [X] Relaxation Recommendations
 - The app provides relaxation suggestions, such as breathing exercises or mindfulness practices.
@@ -105,7 +103,7 @@ These may be displayed as a feed on the main screen.
 
 - If you use VPN (from Russia), while saving quiz you can recieve smart AI advice
 
-![ai_advice](https://github.com/user-attachments/assets/360fe689-5dfa-4ad1-9b4b-8661b1ea73be)
+<img width="1919" height="840" alt="smart_advice" src="https://github.com/user-attachments/assets/0658e7d9-a104-4ebc-9085-b5490f60612f" />
 
 - [X] Stress History and Statistics
 - Users can access historical data and visualize trends, such as average stress levels over time and improvements.
@@ -117,8 +115,13 @@ These may be displayed as a feed on the main screen.
 ![loading](https://github.com/user-attachments/assets/3a8717a0-409c-4c27-8e1e-614e233dd250)
 
 - [X] RU/ENG localization
+      
+![localization](https://github.com/user-attachments/assets/002fa0e3-a6f5-45ff-8f5c-ce8f4f02d49a)
 
-![localization](https://github.com/user-attachments/assets/3be467b9-46ec-4f74-a09d-96aa10cc4be5)
+- [X] Light/dark theme
+
+![light_dark_theme](https://github.com/user-attachments/assets/e1219681-3602-4837-bc1e-e8b9557e1104)
+
 
 - [X] Dynamic statistics
 - When you have low stress level
