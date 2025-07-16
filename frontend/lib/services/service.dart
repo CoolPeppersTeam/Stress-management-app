@@ -1,36 +1,30 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/model.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'dart:html' as html;
 
 class RecommendationService {
   static const String _baseUrl = 'http://localhost:8080';
-  final _storage = const FlutterSecureStorage();
 
   Future<String?> _getToken() async {
-    if (kIsWeb) {
-      return html.window.localStorage['jwt_token'];
-    } else {
-      return _storage.read(key: 'jwt_token');
-    }
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('jwt_token');
   }
 
   Future<List<Recommendation>> fetchRecommendations() async {
     final token = await _getToken();
-    if (token == null) {
-      throw Exception('Не авторизован');
-    }
+    if (token == null) throw Exception('Не авторизован');
+
     final response = await http.get(
       Uri.parse('$_baseUrl/recommendations'),
       headers: {'Authorization': 'Bearer $token'},
     );
+
     if (response.statusCode == 200) {
-      final List<dynamic> data = json.decode(response.body);
-      return data.map((json) => Recommendation.fromJson(json)).toList();
-    } else {
-      throw Exception('Ошибка загрузки рекомендаций');
+      return (json.decode(response.body) as List)
+          .map((json) => Recommendation.fromJson(json))
+          .toList();
     }
+    throw Exception('Ошибка загрузки рекомендаций');
   }
 }
