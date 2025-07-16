@@ -271,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
-
+// 
   Widget _buildStressIndicator() {
     final loc = S.of(context);
     final avg = averageStress ?? 0.0;
