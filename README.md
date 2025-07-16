@@ -202,7 +202,7 @@ flutter pub get
 docker compose up --build
 ```
 
-### Find website here
+### Base url
 ```
 http://localhost:8081
 ```
