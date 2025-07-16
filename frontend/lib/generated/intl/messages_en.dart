@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// This is a library that provides messages for a … locale. All the
+// This is a library that provides messages for a en locale. All the
 // messages from the main program should be duplicated here with the same
 // function name.
 
@@ -18,21 +18,23 @@ final messages = new MessageLookup();
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  String get localeName => '…';
+  String get localeName => 'en';
 
   static String m0(date) => "Date: ${date}";
 
-  static String m1(e) => "Error while savig or recieving sessions: ${e}";
+  static String m1(days) => "${days} days ago";
 
-  static String m2(userName) => "Hello, ${userName}";
+  static String m2(e) => "Error while savig or recieving sessions: ${e}";
 
-  static String m3(level) => "Average stress level: ${level}";
+  static String m3(userName) => "Hello, ${userName}";
 
-  static String m4(count) => "Total sessions: ${count}";
+  static String m4(level) => "Average stress level: ${level}";
 
-  static String m5(weekday, month, day) => "${weekday}, ${month} ${day}";
+  static String m5(count) => "Total sessions: ${count}";
 
-  static String m6(count) => "Total sessions: ${count}";
+  static String m6(weekday, month, day) => "${weekday}, ${month} ${day}";
+
+  static String m7(count) => "Total sessions: ${count}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -48,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "dateLabel": m0,
+    "daysAgo": m1,
     "descriptionLabel": MessageLookupByLibrary.simpleMessage("Description"),
     "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
     "error": MessageLookupByLibrary.simpleMessage("Error"),
@@ -72,11 +75,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "errorPasswordsDontMatch": MessageLookupByLibrary.simpleMessage(
       "Passwords do not match",
     ),
-    "errorSaveRecieve": m1,
+    "errorSaveRecieve": m2,
     "errorUsernameEmpty": MessageLookupByLibrary.simpleMessage(
       "Username cannot be empty",
     ),
-    "helloUser": m2,
+    "helloUser": m3,
     "high": MessageLookupByLibrary.simpleMessage("High"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("Home"),
     "languageLabel": MessageLookupByLibrary.simpleMessage("Language"),
@@ -126,9 +129,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "signUpButton": MessageLookupByLibrary.simpleMessage("Sign Up"),
     "smartRecs": MessageLookupByLibrary.simpleMessage("Smart recommendations"),
     "splashLoading": MessageLookupByLibrary.simpleMessage("Loading…"),
-    "statsAverageStress": m3,
+    "statsAverageStress": m4,
     "statsTitle": MessageLookupByLibrary.simpleMessage("Statistics"),
-    "statsTotalSessions": m4,
+    "statsTotalSessions": m5,
     "stressLevelLabel": MessageLookupByLibrary.simpleMessage("Stress level:"),
     "successTitle": MessageLookupByLibrary.simpleMessage("Done"),
     "supportMessageHigh": MessageLookupByLibrary.simpleMessage(
@@ -144,8 +147,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "High stress detected. Consider deep breathing or a short meditation.",
     ),
     "themeLabel": MessageLookupByLibrary.simpleMessage("Theme"),
-    "todayDate": m5,
-    "totalSessions": m6,
+    "today": MessageLookupByLibrary.simpleMessage("Today"),
+    "todayDate": m6,
+    "totalSessions": m7,
     "usernameLabel": MessageLookupByLibrary.simpleMessage("Username"),
     "viewAll": MessageLookupByLibrary.simpleMessage("View All"),
     "viewSessions": MessageLookupByLibrary.simpleMessage("View Sessions"),

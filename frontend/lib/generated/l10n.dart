@@ -374,6 +374,21 @@ class S {
     );
   }
 
+  /// `Today`
+  String get today {
+    return Intl.message('Today', name: 'today', desc: '', args: []);
+  }
+
+  /// `{days} days ago`
+  String daysAgo(Object days) {
+    return Intl.message(
+      '$days days ago',
+      name: 'daysAgo',
+      desc: '',
+      args: [days],
+    );
+  }
+
   /// `Add Session`
   String get addSessionTitle {
     return Intl.message(

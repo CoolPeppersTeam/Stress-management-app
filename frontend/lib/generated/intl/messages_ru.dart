@@ -22,18 +22,20 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(date) => "Дата: ${date}";
 
-  static String m1(e) =>
+  static String m1(days) => "${days} дней назад";
+
+  static String m2(e) =>
       "Ошибка при сохранении или получении рекомендаций: ${e}";
 
-  static String m2(userName) => "Привет, ${userName}";
+  static String m3(userName) => "Привет, ${userName}";
 
-  static String m3(level) => "Средний уровень стресса: ${level}";
+  static String m4(level) => "Средний уровень стресса: ${level}";
 
-  static String m4(count) => "Всего сессий: ${count}";
+  static String m5(count) => "Всего сессий: ${count}";
 
-  static String m5(weekday, month, day) => "${weekday}, ${month} ${day}";
+  static String m6(weekday, month, day) => "${weekday}, ${month} ${day}";
 
-  static String m6(count) => "Всего сессий: ${count}";
+  static String m7(count) => "Всего сессий: ${count}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -51,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "darkMode": MessageLookupByLibrary.simpleMessage("Тёмная тема"),
     "dateLabel": m0,
+    "daysAgo": m1,
     "descriptionLabel": MessageLookupByLibrary.simpleMessage("Описание"),
     "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
     "error": MessageLookupByLibrary.simpleMessage("Ошибка"),
@@ -75,11 +78,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "errorPasswordsDontMatch": MessageLookupByLibrary.simpleMessage(
       "Пароли не совпадают",
     ),
-    "errorSaveRecieve": m1,
+    "errorSaveRecieve": m2,
     "errorUsernameEmpty": MessageLookupByLibrary.simpleMessage(
       "Имя пользователя не может быть пустым",
     ),
-    "helloUser": m2,
+    "helloUser": m3,
     "high": MessageLookupByLibrary.simpleMessage("Высокий"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("Главная"),
     "languageLabel": MessageLookupByLibrary.simpleMessage("Язык"),
@@ -127,9 +130,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "signUpButton": MessageLookupByLibrary.simpleMessage("Зарегистрироваться"),
     "smartRecs": MessageLookupByLibrary.simpleMessage("Умные рекомендации"),
     "splashLoading": MessageLookupByLibrary.simpleMessage("Загрузка…"),
-    "statsAverageStress": m3,
+    "statsAverageStress": m4,
     "statsTitle": MessageLookupByLibrary.simpleMessage("Статистика"),
-    "statsTotalSessions": m4,
+    "statsTotalSessions": m5,
     "stressLevelLabel": MessageLookupByLibrary.simpleMessage(
       "Уровень стресса:",
     ),
@@ -147,8 +150,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Высокий уровень стресса. Попробуйте дыхательное упражнение.",
     ),
     "themeLabel": MessageLookupByLibrary.simpleMessage("Тема"),
-    "todayDate": m5,
-    "totalSessions": m6,
+    "today": MessageLookupByLibrary.simpleMessage("Сегодня"),
+    "todayDate": m6,
+    "totalSessions": m7,
     "usernameLabel": MessageLookupByLibrary.simpleMessage("Имя пользователя"),
     "viewAll": MessageLookupByLibrary.simpleMessage("Показать все"),
     "viewSessions": MessageLookupByLibrary.simpleMessage("Просмотреть сессии"),
