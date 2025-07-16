@@ -43,7 +43,7 @@ Read about contributors [here](https://github.com/slickip/Stress-management-app/
 #### Documentation (4 points)
 Comprehensive README with:
 - [X] Project overview and setup instructions (1 point)
-- [ ] Screenshots and GIFs of key features (1 point)
+- [X] Screenshots and GIFs of key features (1 point)
 - [X] API documentation (1 point)
 - [X] Architecture diagrams and explanations (1 point)
 
@@ -54,11 +54,12 @@ Comprehensive README with:
 ### Bonus Features (up to 10 points)
 - [X] Localization for Russian (RU) and English (ENG) languages (2 points)
 - [X] Good UI/UX design (up to 3 points)
-- [ ] Integration with external APIs (fitness trackers, health devices) (up to 5 points)
+- [X] Integration with external APIs (fitness trackers, health devices) (up to 5 points)
+- Add Gemini Developers api (works only with vpn)
 - [X] Comprehensive error handling and user feedback (up to 2 points)
-- [ ] Advanced animations and transitions (up to 3 points)
+- [X] Advanced animations and transitions (up to 3 points)
+- Animated loading
 - [ ] Widget implementation for native mobile elements (up to 2 points)
-- [X] integration of advice from the neural network when saving a session (works only with VPN)
       
 Total points implemented: 28/30 (excluding bonus points)
 
