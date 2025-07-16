@@ -13,6 +13,7 @@ class MockAuthService extends AuthService {
   DateTime? lastDate;
   Exception? throwError;
 
+  
   @override
   Future<void> addSession(String description, int stressLevel, DateTime date) async {
     addSessionCalled = true;
