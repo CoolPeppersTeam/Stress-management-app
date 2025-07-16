@@ -9,6 +9,7 @@ import 'dart:async';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import '../generated/l10n.dart';
 import '../providers/locale_provider.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -121,32 +122,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   String _formatDate(DateTime date) {
-    final months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December'
-    ];
-    final weekdays = [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday'
-    ];
-    final dayName = weekdays[date.weekday - 1];
-    final monthName = months[date.month - 1];
-    return '$dayName, $monthName ${date.day}';
+    final loc = S.of(context);
+    final locale = Localizations.localeOf(context).toString();
+    final dayName = DateFormat('EEEE', locale).format(date);
+    final monthName = DateFormat('MMMM', locale).format(date);
+    return loc.todayDate(dayName, monthName, date.day.toString());
   }
 
   @override
@@ -264,6 +244,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildHeader() {
+    final loc = S.of(context);
+    final now = DateTime.now();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -273,13 +255,13 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Hello, $userName',
+                loc.helloUser(userName ?? ''),
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: Theme.of(context).colorScheme.onBackground),
               ),
               const SizedBox(height: 8),
               Text(
-                'Sunday, July 14',
+                _formatDate(now),
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Theme.of(context).colorScheme.onBackground),
               ),
@@ -297,13 +279,13 @@ class _HomeScreenState extends State<HomeScreen> {
     String levelText;
     Color indicatorColor;
     if (avg < 3) {
-      levelText = 'Low';
+      levelText = loc.low;
       indicatorColor = const Color(0xFF8BC34A); // зелёный
     } else if (avg < 7) {
-      levelText = 'Moderate';
+      levelText = loc.moderate;
       indicatorColor = const Color(0xFFFFB74D); // оранжевый
     } else {
-      levelText = 'High';
+      levelText = loc.high;
       indicatorColor = const Color(0xFFE57373); // красный
     }
     return Container(
@@ -363,10 +345,9 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _buildLevelIndicator('Low', '0-30%', const Color(0xFF8BC34A)),
-              _buildLevelIndicator(
-                  'Moderate', '31-70%', const Color(0xFFFFB74D)),
-              _buildLevelIndicator('High', '71-100%', const Color(0xFFE57373)),
+              _buildLevelIndicator(loc.low, '0-30%', const Color(0xFF8BC34A)),
+              _buildLevelIndicator(loc.moderate, '31-70%', const Color(0xFFFFB74D)),
+              _buildLevelIndicator(loc.high, '71-100%', const Color(0xFFE57373)),
             ],
           ),
           const SizedBox(height: 16),
@@ -501,7 +482,7 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Recent History',
+              loc.recentHistory,
               style: Theme.of(context)
                   .textTheme
                   .titleLarge
@@ -510,7 +491,7 @@ class _HomeScreenState extends State<HomeScreen> {
             TextButton(
               onPressed: () => Navigator.pushNamed(context, '/sessions'),
               child: Text(
-                'View All',
+                loc.viewAll,
                 style: TextStyle(
                   color: mintColor,
                   fontWeight: FontWeight.w600,
@@ -527,7 +508,7 @@ class _HomeScreenState extends State<HomeScreen> {
           final date = DateTime.parse(s['date'] as String? ?? '');
           final now = DateTime.now();
           final diff = now.difference(date).inDays;
-          String dateLabel = diff == 0 ? 'Today' : '$diff days ago';
+          String dateLabel = diff == 0 ? loc.today : loc.daysAgo(diff);
           final stressLevel = s['stress_level'] as int? ?? 0;
           final description = s['description'] as String? ?? '';
           final percent = (stressLevel / 10).clamp(0.0, 1.0);

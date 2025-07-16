@@ -45,6 +45,8 @@
   "recentHistory": "Recent History",
   "viewAll": "View All",
   "noRecords": "There are no records, add the first session!",
+  "today": "Today",
+  "daysAgo": "{days} days ago",
 
   "addSessionTitle": "Add Session",
   "descriptionLabel": "Description",

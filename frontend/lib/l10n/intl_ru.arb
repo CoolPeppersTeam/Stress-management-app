@@ -46,6 +46,8 @@
   "recentHistory": "Последние записи",
   "viewAll": "Показать все",
   "noRecords": "Записей нет, добавьте первую сессию!",
+  "today": "Сегодня",
+  "daysAgo": "{days} дней назад",
 
   "addSessionTitle": "Добавить сессию",
   "descriptionLabel": "Описание",
