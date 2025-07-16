@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 import 'package:provider/provider.dart';
 import '../main.dart';
+import '../generated/l10n.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,14 +13,14 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _username = TextEditingController();
+  final _email = TextEditingController();
   final _password = TextEditingController();
   final _auth = AuthService();
   bool _isLoading = false;
 
   @override
   void dispose() {
-    _username.dispose();
+    _email.dispose();
     _password.dispose();
     super.dispose();
   }
@@ -30,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => _isLoading = true);
     try {
       await _auth.login(
-        _username.text.trim(),
+        _email.text.trim(),
         _password.text,
       );
 
@@ -95,14 +96,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 48),
 
-                      // Username
+                      // Email
                       TextFormField(
-                        controller: _username,
+                        controller: _email,
                         style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
-                        decoration: _inputDecoration(context, 'Username'),
+                        decoration: _inputDecoration(context, S.of(context).emailLabel),
                         validator: (value) =>
                         value == null || value.trim().isEmpty
-                            ? 'Username cannot be empty'
+                            ? S.of(context).errorEmailEmpty
                             : null,
                       ),
                       const SizedBox(height: 16),
