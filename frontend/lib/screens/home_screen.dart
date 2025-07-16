@@ -141,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: Text('Главная',
+        title: Text(S.of(context).homeTitle,
             style: Theme.of(context)
                 .textTheme
                 .titleLarge
@@ -271,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
-
+// 
   Widget _buildStressIndicator() {
     final loc = S.of(context);
     final avg = averageStress ?? 0.0;
