@@ -1,14 +1,14 @@
 package main
 
 import (
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/WebSocket"
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/config"
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/docs"
 	"github.com/gin-gonic/gin"
-	"github.com/slickip/Stress-management-app/backend/WebSocket"
-	"github.com/slickip/Stress-management-app/backend/config"
-	"github.com/slickip/Stress-management-app/backend/docs"
 
-	"github.com/slickip/Stress-management-app/backend/internal/ai"
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/internal/ai"
 
-	"github.com/slickip/Stress-management-app/backend/internal/handlers"
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/internal/handlers"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )

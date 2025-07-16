@@ -1,10 +1,12 @@
 ﻿package handlers
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/slickip/Stress-management-app/backend/config"
-	"github.com/slickip/Stress-management-app/backend/internal/models"
 	"net/http"
+
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/internal/models"
+
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/config"
+	"github.com/gin-gonic/gin"
 )
 
 type RecommendationInput struct {

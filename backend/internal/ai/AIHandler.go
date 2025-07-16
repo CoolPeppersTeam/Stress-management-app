@@ -6,9 +6,10 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/internal/models"
+
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/config"
 	"github.com/gin-gonic/gin"
-	"github.com/slickip/Stress-management-app/backend/config"
-	"github.com/slickip/Stress-management-app/backend/internal/models"
 )
 
 type SessionInput struct {
@@ -37,7 +38,7 @@ func GetAdvice(c *gin.Context) {
 		"give me short advice for this problem. advice must be no more than 20 words.",
 		input.Description, input.StressLevel, input.Date.String())
 
-		// Если AI не отвечает — берём случайный совет из базы
+	// Если AI не отвечает — берём случайный совет из базы
 	advice, err := newTextMessge(promt)
 	if err != nil {
 		// Если AI не отвечает — берём случайный совет из базы

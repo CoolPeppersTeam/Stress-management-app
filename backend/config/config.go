@@ -5,8 +5,9 @@ import (
 	"log"
 	"os"
 
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/internal/models"
+
 	"github.com/joho/godotenv"
-	"github.com/slickip/Stress-management-app/backend/internal/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

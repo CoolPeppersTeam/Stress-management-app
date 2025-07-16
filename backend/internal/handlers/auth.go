@@ -1,16 +1,17 @@
 ﻿package handlers
 
 import (
-	"golang.org/x/crypto/bcrypt"
 	"net/http"
 	"os"
 	"strings"
 	"time"
 
+	"golang.org/x/crypto/bcrypt"
+
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/config"
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/internal/models"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
-	"github.com/slickip/Stress-management-app/backend/config"
-	"github.com/slickip/Stress-management-app/backend/internal/models"
 )
 
 type RegisterInput struct {
@@ -149,14 +150,14 @@ func AuthMiddleware() gin.HandlerFunc {
 // @Security BearerAuth
 // @Router /me [get]
 func GetCurrentUser(c *gin.Context) {
-    userID, _ := c.Get("user_id")
-    var user models.User
-    if err := config.DB.First(&user, userID).Error; err != nil {
-        c.JSON(http.StatusNotFound, gin.H{"error": "user not found"})
-        return
-    }
-    c.JSON(http.StatusOK, gin.H{
-        "nickname": user.Nickname,
-        "email": user.Email,
-    })
+	userID, _ := c.Get("user_id")
+	var user models.User
+	if err := config.DB.First(&user, userID).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "user not found"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"nickname": user.Nickname,
+		"email":    user.Email,
+	})
 }

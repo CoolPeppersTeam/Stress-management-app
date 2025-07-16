@@ -3,7 +3,7 @@ package handlers
 import (
 	"log"
 
-	"github.com/slickip/Stress-management-app/backend/internal/models"
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/internal/models"
 
 	"gorm.io/gorm"
 )

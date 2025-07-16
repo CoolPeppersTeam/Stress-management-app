@@ -2,11 +2,12 @@ package tests
 
 import (
 	"bytes"
-	"github.com/slickip/Stress-management-app/backend/config"
-	"github.com/slickip/Stress-management-app/backend/internal/ai"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/config"
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/internal/ai"
 
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"

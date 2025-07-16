@@ -2,12 +2,14 @@
 
 import (
 	"encoding/json"
-	"github.com/gin-gonic/gin"
-	"github.com/slickip/Stress-management-app/backend/WebSocket"
-	"github.com/slickip/Stress-management-app/backend/config"
-	"github.com/slickip/Stress-management-app/backend/internal/models"
 	"net/http"
 	"time"
+
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/internal/models"
+
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/WebSocket"
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/config"
+	"github.com/gin-gonic/gin"
 )
 
 type CreateSessionInput struct {

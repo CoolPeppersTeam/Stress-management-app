@@ -1,12 +1,13 @@
 package tests
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/gorilla/websocket"
-	"github.com/slickip/Stress-management-app/backend/WebSocket"
-	"github.com/stretchr/testify/assert"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/CoolPeppersTeam/Stress-management-app/backend/WebSocket"
+	"github.com/gin-gonic/gin"
+	"github.com/gorilla/websocket"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestHandleWS_ConnectionSuccess(t *testing.T) {
