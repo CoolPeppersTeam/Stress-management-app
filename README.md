@@ -68,7 +68,7 @@ Total points implemented: 29/30 (excluding bonus points)
 The Flutter web version of the Stress Management App is automatically deployed to GitHub Pages on every push to the main branch.
 
 ### Live Demo
-Visit the live application: [Stress Management App](https://slickip.github.io/Stress-management-app/)
+Visit the live application: [Stress Management App](https://coolpeppersteam.github.io/Stress-management-app/)
 
 ### How it works
 1. **Automatic Deployment**: When you push changes to the `main` branch, GitHub Actions automatically:
