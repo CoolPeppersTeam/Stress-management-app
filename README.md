@@ -93,18 +93,29 @@ flutter build web --release --base-href /Stress-management-app/
 - [X] Creation and Viewing of Stress Sessions
 - Users can create entries documenting stressful experiences, including description, stress level, and date.
 
-///// (for screens/gifs)
+![save_load_session](https://github.com/user-attachments/assets/f5940701-6b0f-4194-a1d3-5dc5db8e40a2)
 
 - [X] Relaxation Recommendations
 - The app provides relaxation suggestions, such as breathing exercises or mindfulness practices.
 These may be displayed as a feed on the main screen.
 
-///// (for screens/gifs)
+![recomm](https://github.com/user-attachments/assets/080a1148-6dc3-4082-a6d5-b4b45825f570)
+
+
+- If you use VPN (from Russia), while saving quiz you can recieve smart AI advice
+
+![ai_advice](https://github.com/user-attachments/assets/360fe689-5dfa-4ad1-9b4b-8661b1ea73be)
 
 - [X] Stress History and Statistics
 - Users can access historical data and visualize trends, such as average stress levels over time and improvements.
 
-///// (for screens/gifs)
+![history](https://github.com/user-attachments/assets/9768a76a-6b77-466d-a8cf-984849f1b7c4)
+
+- [X] Animated loading
+
+![loading](https://github.com/user-attachments/assets/3a8717a0-409c-4c27-8e1e-614e233dd250)
+
+- [X] RU/ENG localization
 
 ## Technical stack
 ### Backend:
