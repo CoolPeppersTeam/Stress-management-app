@@ -22,7 +22,6 @@ func main() {
 
 	r := gin.Default()
 
-	// 🔥 CORS Middleware
 	r.Use(func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
@@ -34,7 +33,6 @@ func main() {
 		c.Next()
 	})
 
-	// 🔥 Подключение Swagger-документации
 	docs.SwaggerInfo.BasePath = "/"
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 

@@ -14,7 +14,6 @@ import (
 // setupRouter initializes the Gin engine with routes for testing
 func setupRouter() *gin.Engine {
 	config.ConnectDatabase()
-
 	r := gin.Default()
 	r.POST("/register", handlers.Register)
 	r.POST("/login", handlers.Login)
@@ -52,7 +51,6 @@ func TestRegister(t *testing.T) {
 func TestLogin(t *testing.T) {
 	router := setupRouter()
 	config.DB.Exec("DELETE FROM users WHERE email IN ('test@example.com', 'login@test.com')")
-	// First, register a user
 	registerBody := `{
   		"nickname": "LoginUser",
   		"email": "login@test.com",
@@ -63,7 +61,6 @@ func TestLogin(t *testing.T) {
 	w1 := httptest.NewRecorder()
 	router.ServeHTTP(w1, req1)
 
-	// Then attempt to login with the same credentials
 	loginBody := `{
   		"email": "login@test.com",
   		"password": "12345A"
@@ -77,7 +74,6 @@ func TestLogin(t *testing.T) {
 		t.Errorf("Expected status 200, got %d", w2.Code)
 	}
 
-	// Check if the token is present in response
 	var response map[string]string
 	err := json.Unmarshal(w2.Body.Bytes(), &response)
 	if err != nil || response["token"] == "" {
